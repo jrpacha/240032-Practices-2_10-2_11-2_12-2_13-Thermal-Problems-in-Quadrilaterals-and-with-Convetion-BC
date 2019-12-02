@@ -4,6 +4,7 @@
 
 ### P2.9  - Thermal Equation with bilinear quadrilateral elemets 
 ### P2.10 - Thermal Equation with bilinear quadrilateral elemets and convection B.C.
+### P2.11a - The same problem using a triangular and quadrilateral elements and convection BC
 ### P2.11b - The same problem using a triangular and quadrilateral elements and convection BC  
 
 You can find the session's guide ---together with other extra material files---,
