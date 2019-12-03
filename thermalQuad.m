@@ -65,7 +65,7 @@ fixedNodes=[indLeft',indRight']; %Fixed Nodes (global num.)
 freeNodes = setdiff(1:numNod,fixedNodes); %Complementary of fixed nodes
 
 % ------------ Essential BC
-u=zeros(numNod,1); %initialize uu vector
+u=zeros(numNod,1); %initialize u vector
 u(indRight)=tempRight; %all of them are zero
 u(indLeft)=tempLeft;
 Fm=F(freeNodes)-K(freeNodes,fixedNodes)*u(fixedNodes);%here u can be 

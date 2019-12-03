@@ -1,4 +1,4 @@
-%% Engine Cooling fin
+%% Engine Cooling fin (Quad mesh)
 clearvars
 close all
 
