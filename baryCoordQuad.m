@@ -107,7 +107,7 @@ alpha3=mu*lambda;
 alpha4=(1-lambda)*mu;
 alphas=[alpha1,alpha2,alpha3,alpha4];
 
-if (min(alphas) < 0)
+if (min(alphas) < -1.0e-10)
     isInside=0;
 end
 

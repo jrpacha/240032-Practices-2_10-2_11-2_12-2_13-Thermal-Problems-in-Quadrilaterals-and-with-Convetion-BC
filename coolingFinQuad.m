@@ -2,6 +2,8 @@
 clearvars
 close all
 
+fileName='tempCoolingFinQuad.xlsx'; %Excel file to write the results in
+
 kc= 0.5;         %Thermal conductivity
 ff= 0.0;
 tempRight= 90.0; %Temperature at the right boundary
@@ -17,9 +19,10 @@ numElem= size(elem,1);
 numbering=0;
 plotElements(nodes, elem, numbering);
 
-indTop= find(nodes(:,2)-2*nodes(:,1)/5 > 1.99); %top boundary's nodes' indices
+%indTop= find(nodes(:,2)-2*nodes(:,1)/5 > 1.99); %top boundary's nodes' indices
+indTop=find(abs(2*nodes(:,1)/5 +2 - nodes(:,2))< 0.01); %top boundary's nodes' indices
 indLeft=find(nodes(:,1) < 0.01); %left boundary's nodes' indices
-indRight=find(nodes(:,1) > 4.99) %right boundary's nodes' indices
+indRight=find(nodes(:,1) > 4.99); %right boundary's nodes' indices
 %Id for the circle's nodes
 
 hold on
@@ -93,17 +96,21 @@ Q=Kini*u-Fini;
 titol='Equation solution';
 colorScale='jet';
 plotContourSolution(nodes,elem,u,titol,colorScale)
+hold on
+plot(p(1,1),p(1,2),'o','markerFaceColor','black',...
+    'MarkerEdgeColor','white')
+hold off
 
 %Fancy output
 tableSol=[(1:numNod)',nodes,u,Q];
 fprintf('%8s%9s%15s%15s%14s\n','Num.Nod','X','Y','T','Q')
 fprintf('%5d%18.7e%15.7e%15.7e%15.7e\n',tableSol')
 
-%write an Excel with the solutions
-% format long e
-% ts=table(int16(tableSol(:,1)),tableSol(:,2),tableSol(:,3),tableSol(:,4),...
-%     tableSol(:,5),'variableNames',{'NumNod','X','Y','T','Q'});
-% writetable(ts,fileName);
+%write an Excel with the solutions (Optional)
+format long e
+ts=table(int16(tableSol(:,1)),tableSol(:,2),tableSol(:,3),tableSol(:,4),...
+    tableSol(:,5),'variableNames',{'NumNod','X','Y','T','Q'});
+writetable(ts,fileName);
 
 %Compute the temperature at point p=[0.9,2.1].
 

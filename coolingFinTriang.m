@@ -19,7 +19,8 @@ numElem= size(elem,1);
 numbering=0;
 plotElements(nodes, elem, numbering);
 
-indTop= find(nodes(:,2)-2*nodes(:,1)/5 > 1.99); %top boundary's nodes' indices
+%indTop= find(nodes(:,2)-2*nodes(:,1)/5 > 1.99); 
+indTop=find(abs(2*nodes(:,1)/5 +2 - nodes(:,2))< 0.01); %top boundary's nodes' indices
 indLeft=find(nodes(:,1) < 0.01);  %left boundary's nodes' indices
 indRight=find(nodes(:,1) > 4.99); %right boundary's nodes' indices
 %Id for the circle's nodes
@@ -94,6 +95,10 @@ Q=Kini*u-Fini;
 titol='Equation solution';
 colorScale='jet';
 plotContourSolution(nodes,elem,u,titol,colorScale)
+hold on
+plot(p(1,1),p(1,2),'o','markerFaceColor','black',...
+    'MarkerEdgeColor','white')
+hold off
 
 %Fancy output
 tableSol=[(1:numNod)',nodes,u,Q];
