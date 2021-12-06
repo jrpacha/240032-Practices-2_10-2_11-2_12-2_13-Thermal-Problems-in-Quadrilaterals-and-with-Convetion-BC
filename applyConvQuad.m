@@ -23,7 +23,7 @@ function [K,Q]=applyConvQuad(indCV,beta,Tinf,K,Q,nodes,elem)
 %------------------------------------------------------------------------------
 
 numElem=size(elem,1); 
-numCo=size(indCV,2);
+numCo=length(indCV);
 if (numCo==1) 
     error('applyConvQuad: It can''t manage a single node'); 
 end

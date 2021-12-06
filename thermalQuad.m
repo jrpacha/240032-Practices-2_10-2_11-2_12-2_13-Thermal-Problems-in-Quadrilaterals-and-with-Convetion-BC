@@ -14,8 +14,8 @@ numNod=size(nodes,1);
 numElem=size(elem,1);
 %numbering=1;
 numbering=0;
-figure()
-plotElements(nodes,elem,numbering);
+%figure()
+plotElementsOld(nodes,elem,numbering);
 
 indLeft=find(nodes(:,1) < 0.01);
 indRight=find(nodes(:,1) > 0.99);

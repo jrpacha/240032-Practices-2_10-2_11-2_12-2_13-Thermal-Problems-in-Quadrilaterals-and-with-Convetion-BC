@@ -17,7 +17,7 @@ numNod= size(nodes,1);
 numElem= size(elem,1);
 
 numbering=0;
-plotElements(nodes, elem, numbering);
+plotElementsOld(nodes, elem, numbering);
 
 %indTop= find(nodes(:,2)-2*nodes(:,1)/5 > 1.99); %top boundary's nodes' indices
 indTop=find(abs(2*nodes(:,1)/5 +2 - nodes(:,2))< 0.01); %top boundary's nodes' indices
