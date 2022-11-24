@@ -6,7 +6,7 @@
 ### P2.13 - The same problem using a triangular and quadrilateral elements and convection BC
 
 You can find the session's guide ---together with other extra material files---,
-at Toni Susin's 'Numerical Factory', 
+at professor Antonio Susin's 'Numerical Factory', 
 
 https://numfactory.upc.edu/numfactory/subjects/?subject=FEM&version=etseib&lang=en&section=2&subsection=P
 
