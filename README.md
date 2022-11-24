@@ -1,9 +1,9 @@
-# Practices 2.9, 2.10, 2.11, and 2.12
+# Practices 2.10, 2.11, 2.12, and 2.13
 ## 
-### P2.9  - Thermal Equation with bilinear quadrilateral elemets 
-### P2.10 - Thermal Equation with bilinear quadrilateral elemets and convection B.C.
-### P2.11 - Convection BC example: triangular version
-### P2.12 - The same problem using a triangular and quadrilateral elements and convection BC
+### P2.10 - Thermal Equation with bilinear quadrilateral elemets 
+### P2.11 - Thermal Equation with bilinear quadrilateral elemets and convection B.C.
+### P2.12 - Convection BC example: triangular version
+### P2.13 - The same problem using a triangular and quadrilateral elements and convection BC
 
 You can find the session's guide ---together with other extra material files---,
 at Toni Susin's 'Numerical Factory', 

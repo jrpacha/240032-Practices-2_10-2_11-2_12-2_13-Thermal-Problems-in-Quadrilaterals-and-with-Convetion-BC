@@ -1,12 +1,19 @@
 clearvars
 close all
 
-fileName='solutionThermalQuad.xlsx';
+fileName='solutionThermalQuadExercise2.xlsx';
 
 tempRight = 0.0;
 tempLeft = 0.0;
 
-eval('mesh2x2Quad');
+kc= 0.9;            %For exercise 2
+tempLeft= 50.0;
+tempRight= 1.0;
+
+
+%eval('mesh2x2Quad');
+%eval('mesh4x4Quad');
+eval('mesh8x8Quad');
 
 numNod=size(nodes,1);
 numElem=size(elem,1);
@@ -22,13 +29,12 @@ plot(nodes(indLeft,1),nodes(indLeft,2),'or')
 plot(nodes(indRight,1),nodes(indRight,2),'og')
 hold off
 
-a11=1;
-a12=1;
+a11=kc;    %Coefficients for Exercise 2
+a12=0.0;
 a21=a12;
-%a21=2;
 a22=a11;
-a00=1;
-f=1;
+a00=0.0;
+f=0.0;
 
 coeff=[a11,a12,a21,a22,a00,f];
 K=zeros(numNod);
@@ -68,14 +74,14 @@ u(indLeft)=tempLeft;
 Fm=F(freeNodes)-K(freeNodes,fixedNodes)*u(fixedNodes);%here u can be 
                                                       %different from zero 
                                                       % modify the linear system, this is only valid if BC = 0.
-%Reduced system
+%------------- Reduced system
 Km=K(freeNodes,freeNodes);
 Fm=Fm+Q(freeNodes);%only for fixed nodes
-%Compute the solution
+
+%Compute the solution 
 %solve the System
-
-
 format short e; %just to a better view of the numbers
+format compact;
 um=Km\Fm;
 u(freeNodes)=um;
 %u
@@ -92,7 +98,31 @@ fprintf('%8s%9s%15s%15s%14s\n','Num.Nod','X','Y','T','Q')
 fprintf('%5d%18.7e%15.7e%15.7e%15.7e\n',tableSol')
 
 %write an Excel with the solutions
-format long e
+format long e; format compact
 ts=table(int16(tableSol(:,1)),tableSol(:,2),tableSol(:,3),tableSol(:,4),...
      tableSol(:,5),'variableNames',{'NumNod','X','Y','T','Q'});
 writetable(ts,fileName);
+
+%Exercise 2:
+%Consider now a thermal distribution problem of a square made with some 
+%material with conductivity coefficient $$k_c=0.9$ and BC: $$u(0,y)=50, 
+%u(1,y)=1$. Compute the temperature at point $$p=(0.2,0.8)$ using now the 
+%files mesh4x4Quad and mesh8x8Quad
+
+p= [0.2, 0.8];
+
+for e=1:numElem
+    vertexs= nodes(elem(e,:),:);
+    [alphas,isInside] = baryCoordQuad(vertexs,p);
+    if (isInside > 0)
+        pElem = e;
+        numNodElem= elem(e,:);
+        break;
+    end
+end
+
+tempP = alphas*u(numNodElem);
+fprintf('\nExercise 2:\n')
+fprintf('Point P = (%.1f,%.1f) belongs to element number: %d\n',p,pElem)
+fprintf('Number of nodes of elem %d: %d, %d, %d, %d\n',pElem,numNodElem)
+fprintf('Interpolated temperature at point P: %.4e\n',tempP)
