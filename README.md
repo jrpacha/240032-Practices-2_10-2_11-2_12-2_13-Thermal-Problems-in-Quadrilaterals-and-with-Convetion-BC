@@ -20,4 +20,4 @@ juan.ramon.pacha@upc.edu
 
 Many thanks,
 
-J.R.The same problem using a triangular and quadrilateral elements and convection BC
+J.R.
