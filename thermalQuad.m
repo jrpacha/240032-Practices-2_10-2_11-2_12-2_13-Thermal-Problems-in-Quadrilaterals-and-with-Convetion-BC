@@ -1,12 +1,13 @@
 clearvars
 close all
 
+meshFile = 'mesh2x2Quad';
 fileName='solutionThermalQuad.xlsx';
 
 tempRight = 0.0;
 tempLeft = 0.0;
 
-eval('mesh2x2Quad');
+eval(meshFile);
 
 numNod=size(nodes,1);
 numElem=size(elem,1);
@@ -45,8 +46,6 @@ for e=1:numElem
         F(rows)=F(rows)+Fe;
     end
 end 
-Kini = K;
-Fini = F;
 
 %Boundary Conditions (BC)
 %Impose Boundary Conditions for this example. In this case only essential 
@@ -83,7 +82,7 @@ u(freeNodes)=um;
 %u
 
 %PostProcess: Compute secondary variables and plot results
-Q=Kini*u-Fini;
+Q=K*u-F;
 titol='Equation solution';
 colorScale='jet';
 plotContourSolution(nodes,elem,u,titol,colorScale)
