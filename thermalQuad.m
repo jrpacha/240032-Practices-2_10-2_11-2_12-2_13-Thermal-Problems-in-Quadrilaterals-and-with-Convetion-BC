@@ -45,6 +45,8 @@ for e=1:numElem
         F(rows)=F(rows)+Fe;
     end
 end 
+Kini = K;
+Fini = F;
 
 %Boundary Conditions (BC)
 %Impose Boundary Conditions for this example. In this case only essential 
@@ -70,7 +72,7 @@ Fm=F(freeNodes)-K(freeNodes,fixedNodes)*u(fixedNodes);%here u can be
                                                       % modify the linear system, this is only valid if BC = 0.
 %Reduced system
 Km=K(freeNodes,freeNodes);
-Fm=Fm+Q(freeNodes);%only for fixed nodes
+Fm=Fm+Q(freeNodes);%only for free nodes
 %Compute the solution
 %solve the System
 
@@ -81,7 +83,7 @@ u(freeNodes)=um;
 %u
 
 %PostProcess: Compute secondary variables and plot results
-Q=K*u-F;
+Q=Kini*u-Fini;
 titol='Equation solution';
 colorScale='jet';
 plotContourSolution(nodes,elem,u,titol,colorScale)
