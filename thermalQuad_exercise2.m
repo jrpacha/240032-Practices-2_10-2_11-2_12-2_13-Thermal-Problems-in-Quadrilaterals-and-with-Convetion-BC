@@ -1,13 +1,14 @@
 clearvars
 close all
 
-kc= 0.9;            %For exercise 2
-tempLeft= 50.0;
+
+tempLeft= 50.0;  %Essential B.C. for exercise 2
 tempRight= 1.0;
 
-p= [0.2, 0.8];
+p= [0.2, 0.8];   %Point at which temperature is interpolated in exercise 2
 
-a11=kc;             %Coefficients for Exercise 2
+kc = 0.9;        %Equation coeffcients for exercise 2
+a11=kc;             
 a12=0.0;
 a21=a12;
 a22=a11;
@@ -78,6 +79,17 @@ for meshFileNum = 1:numMeshFiles
     %solve the system
     um=Km\Fm;
     u(freeNodes)=um;
+
+    %
+    %Post-process
+
+    %Compute Q
+    Q = K*u - F;
+
+    %Plot soluition
+    title = ['Solution (',meshFile(5:7),') mesh'];
+    colorPalette = 'jet';
+    plotContourSolution(nodes,elem,u,title,colorPalette)
 
     for e=1:numElem
         vertexs= nodes(elem(e,:),:);
